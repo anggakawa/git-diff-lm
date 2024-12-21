@@ -29,12 +29,12 @@ On first run, you'll be prompted to enter:
 1. Stage your changes using `git add`
 2. Run the tool:
 ```bash
-python main.py
+commit-ai
 ```
 
 To update stored credentials:
 ```bash
-python main.py -u
+commit-ai -u
 ```
 
 ## How it Works
