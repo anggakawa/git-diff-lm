@@ -29,12 +29,12 @@ On first run, you'll be prompted to enter:
 1. Stage your changes using `git add`
 2. Run the tool:
 ```bash
-commit-ai
+komitai
 ```
 
 To update stored credentials:
 ```bash
-commit-ai -u
+komitai -u
 ```
 
 ## How it Works

@@ -2,7 +2,7 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 [project]
-name = "git_diff_lm_anggakawa"
+name = "komitai"
 version = "0.0.1"
 authors = [
     { name="Angga", email="anggakawa@gmail.com" },
@@ -43,5 +43,5 @@ Homepage = "https://github.com/anggakawa/git-diff-lm"
 Issues = "https://github.com/anggakawa/git-diff-lm/issues"
 
 [project.scripts]
-komitai = "git_diff_lm_anggakawa.main:main"
+komitai = "git_diff_lm.main:main"
 
