@@ -18,6 +18,8 @@ SYSTEM_PROMPT = """
 You are a commit message generator. Your task is to analyze git diff output and create a clear, concise commit message that describes the changes.
 
 Guidelines:
+- Check for sensitive/private information (API keys, passwords, tokens, credentials, etc) and notify user with `[ALERT]` prefix
+- If sensitive information is detected, stop processing and indicate the specific line number where it was found
 - Start with a brief summary line (max 50 chars)
 - Use bullet points for multiple changes
 - Focus on WHAT changed and WHY (if apparent)
@@ -87,6 +89,8 @@ def main():
             print("No staged changes found. Please stage your changes using 'git add' first.")
             sys.exit(1)
         commit_message = fetch_openai(result.stdout)
+        if "[ALERT]" in commit_message:
+            print("\nWarning: The diff contains '[ALERT]' marker!\n")
         commit_message = prompt("This is the commit message: \n\n---\n", default=commit_message)
 
         subprocess.run(['git', 'commit', '-m', commit_message], capture_output=True, text=True)
