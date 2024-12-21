@@ -38,6 +38,16 @@ Analyze the following git diff and generate an appropriate commit message:
 """
 
 def check_for_creds(env_path, update=False):
+    def get_system_prompt():
+        current_prompt = os.environ.get('SYSTEM_PROMPT', SYSTEM_PROMPT)
+        print("\nCurrent system prompt:")
+        print(current_prompt)
+        edit = input("\nWould you like to edit the system prompt? (y/N): ").lower().strip()
+        if edit == 'y':
+            new_prompt = prompt("Enter new system prompt (press Esc+Enter when done):\n", multiline=True)
+            set_key(env_path, 'SYSTEM_PROMPT', new_prompt)
+            os.environ['SYSTEM_PROMPT'] = new_prompt
+            print("\nSystem prompt updated successfully!")
     def get_api_key():
         api_key = getpass("Please enter your OpenAI API key: ").strip()
         set_key(env_path, 'OPENAI_API_KEY', api_key)
@@ -53,6 +63,7 @@ def check_for_creds(env_path, update=False):
     if update:
         get_api_key()
         get_base_url()
+        get_system_prompt()
     else:
         if not os.environ.get('OPENAI_API_KEY'):
             get_api_key()
@@ -69,7 +80,7 @@ def fetch_openai(message):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": os.environ.get('SYSTEM_PROMPT', SYSTEM_PROMPT)},
                 {"role": "user", "content": message}
             ]
         )
