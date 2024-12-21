@@ -8,7 +8,10 @@ from prompt_toolkit import prompt
 import sys
 
 
-ENV_PATH = Path(__file__).parent / '.env'
+ENV_PATH = Path.home() / '.config' / 'git-diff-lm' / '.env'
+# Ensure the directory exists
+ENV_PATH.parent.mkdir(parents=True, exist_ok=True)
+
 load_dotenv(ENV_PATH)
 
 SYSTEM_PROMPT = """
@@ -61,7 +64,7 @@ def fetch_openai(message):
             api_key=os.environ.get('OPENAI_API_KEY'),
         )
         response = client.chat.completions.create(
-            model="gpt-4",  # or "gpt-3.5-turbo"
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": message}
@@ -80,9 +83,12 @@ def main():
 
         check_for_creds(ENV_PATH, args.update)
         result = subprocess.run('git diff --staged', capture_output=True, text=True, shell=True)
+        if not result.stdout:
+            print("No staged changes found. Please stage your changes using 'git add' first.")
+            sys.exit(1)
         commit_message = fetch_openai(result.stdout)
         commit_message = prompt("This is the commit message: \n\n---\n", default=commit_message)
-                
+
         subprocess.run(['git', 'commit', '-m', commit_message], capture_output=True, text=True)
     except KeyboardInterrupt:
         print("\nExiting...")
