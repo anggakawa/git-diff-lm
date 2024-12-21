@@ -43,5 +43,5 @@ Homepage = "https://github.com/anggakawa/git-diff-lm"
 Issues = "https://github.com/anggakawa/git-diff-lm/issues"
 
 [project.scripts]
-commit-ai = "git_diff_lm_anggakawa.main:main"
+komitai = "git_diff_lm_anggakawa.main:main"
 

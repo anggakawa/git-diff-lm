@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 import argparse
 from prompt_toolkit import prompt
+from getpass import getpass
 import sys
 
 
@@ -38,7 +39,7 @@ Analyze the following git diff and generate an appropriate commit message:
 
 def check_for_creds(env_path, update=False):
     def get_api_key():
-        api_key = input("Please enter your OpenAI API key: ").strip()
+        api_key = getpass("Please enter your OpenAI API key: ").strip()
         set_key(env_path, 'OPENAI_API_KEY', api_key)
         os.environ['OPENAI_API_KEY'] = api_key
         
