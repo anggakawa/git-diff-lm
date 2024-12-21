@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "git_diff_lm_anggakawa"
-version = "0.0.5"
+version = "0.0.1"
 authors = [
     { name="Angga", email="anggakawa@gmail.com" },
 ]
