@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "git_diff_lm_anggakawa"
+version = "0.0.5"
+authors = [
+    { name="Angga", email="anggakawa@gmail.com" },
+]
+description = "Generate git commit using AI"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "annotated-types>=0.7.0",
+    "anyio>=4.7.0", 
+    "certifi>=2024.12.14",
+    "colorama>=0.4.6",
+    "distro>=1.9.0",
+    "exceptiongroup>=1.2.2",
+    "h11>=0.14.0",
+    "httpcore>=1.0.7",
+    "httpx>=0.28.1",
+    "idna>=3.10",
+    "jiter>=0.8.2",
+    "openai>=1.58.1",
+    "prompt_toolkit>=3.0.48",
+    "pydantic>=2.6.1",
+    "pydantic_core>=2.21.0", 
+    "python-dotenv>=1.0.1",
+    "sniffio>=1.3.1",
+    "tqdm>=4.67.1",
+    "typing_extensions>=4.12.2",
+    "wcwidth>=0.2.13"
+]
+
+[project.urls]
+Homepage = "https://github.com/anggakawa/git-diff-lm"
+Issues = "https://github.com/anggakawa/git-diff-lm/issues"
+
+[project.scripts]
+commit-ai = "git_diff_lm_anggakawa.main:main"
+
